@@ -1,1 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Menu</title>
+  <style>
+    :root{
+      --bg:#f7f5f1;
+      --paper:#fffdf9;
+      --text:#2f2f2f;
+      --muted:#77736d;
+      --line:#d9d3ca;
+      --accent:#7c8571;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:
+        "Hiragino Mincho ProN","Yu Mincho","YuMincho",
+        "Noto Serif JP",serif;
+      line-height:1.9;
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{
+      max-width:720px;
+      margin:0 auto;
+      padding:28px 18px 48px;
+    }
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:38px 22px 34px;
+      box-shadow:0 10px 30px rgba(0,0,0,.04);
+    }
+    .eyebrow{
+      text-align:center;
+      letter-spacing:.22em;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+    h1{
+      text-align:center;
+      font-size:28px;
+      font-weight:500;
+      letter-spacing:.08em;
+      margin:0 0 8px;
+    }
+    .date{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.08em;
+      margin-bottom:34px;
+    }
+    .divider{
+      width:42px;
+      height:1px;
+      background:var(--accent);
+      margin:0 auto 34px;
+      opacity:.7;
+    }
+    .course{
+      text-align:center;
+      padding:0 4px;
+    }
+    .item{
+      margin:0 0 27px;
+    }
+    .item p{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.02em;
+    }
+    .item .small{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .ornament{
+      margin:24px auto 26px;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--accent);
+      opacity:.55;
+    }
+    .note{
+      margin-top:32px;
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .venue{
+      margin-top:34px;
+      text-align:center;
+      font-size:14px;
+      letter-spacing:.05em;
+    }
 
+
+    .motif{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .botanical{
+      position:absolute;
+      width:250px;
+      height:310px;
+      opacity:.12;
+    }
+    .botanical.top{
+      top:-45px;
+      left:-58px;
+      transform:rotate(-8deg);
+    }
+    .botanical.bottom{
+      right:-62px;
+      bottom:-54px;
+      transform:rotate(174deg);
+      opacity:.10;
+    }
+    .botanical svg{
+      width:100%;
+      height:100%;
+      overflow:visible;
+    }
+    .branch-line,
+    .twig-line{
+      fill:none;
+      stroke:var(--accent);
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .branch-line{stroke-width:1.35}
+    .twig-line{stroke-width:.9}
+    .camellia-leaf{
+      fill:none;
+      stroke:var(--accent);
+      stroke-width:1;
+    }
+    .maple-leaf{
+      fill:none;
+      stroke:var(--accent);
+      stroke-width:.9;
+      stroke-linejoin:round;
+    }
+    .berry{
+      fill:none;
+      stroke:var(--accent);
+      stroke-width:.85;
+    }
+    .wrap{position:relative;z-index:1}
+
+    .tabs{
+      display:flex;
+      width:min(360px,100%);
+      margin:0 auto 34px;
+      padding:4px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(247,245,241,.7);
+    }
+    .tab-button{
+      flex:1;
+      appearance:none;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      border-radius:999px;
+      padding:9px 14px;
+      font:inherit;
+      font-size:13px;
+      letter-spacing:.14em;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .tab-button.active{
+      background:var(--paper);
+      color:var(--text);
+      box-shadow:0 2px 10px rgba(0,0,0,.06);
+    }
+    .tab-panel{display:none;}
+    .tab-panel.active{display:block;}
+    .section-title{font-size:18px;font-weight:500;letter-spacing:.16em;text-align:center;margin:8px 0 28px;}
+    .drink-section{margin-top:46px;padding-top:38px;border-top:1px solid var(--line);}
+    .drink-group{margin:0 0 25px;text-align:center;}
+    .drink-group h3{font-size:14px;letter-spacing:.12em;margin:0 0 5px;font-weight:600;}
+    .drink-group p{font-size:14px;margin:0;line-height:1.75;}
+    .drink-group .small{font-size:13px;color:var(--muted);}
+    @media (max-width:480px){
+      .wrap{padding:16px 10px 28px}
+      .card{padding:30px 16px 28px;border-radius:18px}
+      h1{font-size:24px}
+      .item p{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <div class="motif" aria-hidden="true">
+    <div class="botanical top">
+      <svg viewBox="0 0 250 310" xmlns="http://www.w3.org/2000/svg">
+        <!-- sweeping autumn branch -->
+        <path class="branch-line" d="M22 300 C52 250, 78 215, 108 169 C135 127, 157 83, 174 16"/>
+        <path class="twig-line" d="M71 227 C49 210, 36 192, 29 171"/>
+        <path class="twig-line" d="M99 182 C77 165, 65 146, 59 126"/>
+        <path class="twig-line" d="M126 140 C147 127, 162 111, 171 91"/>
+        <path class="twig-line" d="M149 94 C130 78, 121 60, 119 42"/>
+
+        <!-- camellia-like evergreen leaves -->
+        <path class="camellia-leaf" d="M27 172 C8 156, 8 135, 29 128 C48 139, 47 158, 27 172 Z"/>
+        <path class="twig-line" d="M28 170 L31 132"/>
+        <path class="camellia-leaf" d="M58 126 C40 108, 45 88, 66 84 C83 98, 78 117, 58 126 Z"/>
+        <path class="twig-line" d="M59 124 L65 88"/>
+        <path class="camellia-leaf" d="M170 91 C188 73, 208 77, 212 97 C198 114, 180 110, 170 91 Z"/>
+        <path class="twig-line" d="M173 91 L207 96"/>
+
+        <!-- restrained maple leaves -->
+        <path class="maple-leaf" d="M45 204 l-11 -9 3 13 -12 -2 9 10 -9 5 13 2 -2 14 10 -10 8 10 -1 -14 13 -2 -10 -6 8 -10 -12 3 2 -13 z"/>
+        <path class="twig-line" d="M45 204 L60 220"/>
+        <path class="maple-leaf" d="M120 64 l-10 -8 2 12 -11 -2 8 9 -8 5 12 2 -2 12 9 -9 7 9 -1 -12 12 -2 -9 -5 7 -9 -11 3 2 -12 z"/>
+        <path class="twig-line" d="M120 64 L133 77"/>
+
+        <!-- small autumn berries / buds -->
+        <circle class="berry" cx="160" cy="55" r="3.5"/>
+        <circle class="berry" cx="168" cy="49" r="3"/>
+        <circle class="berry" cx="175" cy="58" r="3.2"/>
+        <path class="twig-line" d="M160 58 L151 72 M168 52 L153 72 M175 61 L154 73"/>
+      </svg>
+    </div>
+
+    <div class="botanical bottom">
+      <svg viewBox="0 0 250 310" xmlns="http://www.w3.org/2000/svg">
+        <path class="branch-line" d="M22 300 C52 250, 78 215, 108 169 C135 127, 157 83, 174 16"/>
+        <path class="twig-line" d="M71 227 C49 210, 36 192, 29 171"/>
+        <path class="twig-line" d="M99 182 C77 165, 65 146, 59 126"/>
+        <path class="twig-line" d="M126 140 C147 127, 162 111, 171 91"/>
+        <path class="camellia-leaf" d="M27 172 C8 156, 8 135, 29 128 C48 139, 47 158, 27 172 Z"/>
+        <path class="twig-line" d="M28 170 L31 132"/>
+        <path class="camellia-leaf" d="M170 91 C188 73, 208 77, 212 97 C198 114, 180 110, 170 91 Z"/>
+        <path class="twig-line" d="M173 91 L207 96"/>
+        <path class="maple-leaf" d="M45 204 l-11 -9 3 13 -12 -2 9 10 -9 5 13 2 -2 14 10 -10 8 10 -1 -14 13 -2 -10 -6 8 -10 -12 3 2 -13 z"/>
+        <path class="twig-line" d="M45 204 L60 220"/>
+        <circle class="berry" cx="148" cy="117" r="3.2"/>
+        <circle class="berry" cx="157" cy="111" r="2.8"/>
+        <path class="twig-line" d="M149 120 L137 135 M157 114 L138 136"/>
+      </svg>
+    </div>
+  </div>
+  <main class="wrap">
+    <section class="card">
+      <div class="eyebrow">Wedding Reception</div>
+      <h1>MENU</h1>
+      <div class="date">2026.09.27</div>
+      <div class="divider"></div>
+
+      <div class="tabs" role="tablist" aria-label="メニュー切り替え">
+        <button class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="food-panel" id="food-tab" data-tab="food-panel">FOOD</button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="drink-panel" id="drink-tab" data-tab="drink-panel">DRINK</button>
+      </div>
+
+      <div id="food-panel" class="tab-panel active" role="tabpanel" aria-labelledby="food-tab">
+      <div class="course">
+        <div class="item">
+          <p>旬を迎えた茸のマリアージュ</p>
+          <p class="small">〜 甘えび・鴨・柿 〜</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>海老のカダイフ巻き　モルタデラのアンクルート</p>
+          <p>本鮪の黒米握り　オレンジのムース</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>米茄子の鴫炊き</p>
+          <p>合鴨ロースの醤油煮　葱の香り</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>カナダ産オマール海老の西京味噌焼き</p>
+          <p class="small">ミックスリーフ添え</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>国産牛サーロインステーキ</p>
+          <p>大徳寺納豆を使った自家製豆豉　山葵</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>焼き蟹味噌ご飯のお茶漬け</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>抹茶と栗のモンブラン仕立て</p>
+          <p>温州みかんのソルベと</p>
+          <p>エルダーフラワーとシトラスジュレ</p>
+        </div>
+      </div>
+
+      <div class="note">＊米は国内産です</div>
+      </div>
+
+      <section id="drink-panel" class="tab-panel" role="tabpanel" aria-labelledby="drink-tab">
+        <div class="drink-group"><h3>CHAMPAGNE</h3><p class="small">フランス産</p><p>ローラン・ペリエ<br>ラ・キュヴェ・ブリュット</p></div>
+        <div class="drink-group"><h3>PAIRING TEA</h3><p class="small">日本産</p><p>グリーンティー・マスカット</p></div>
+        <div class="drink-group"><h3>WHITE WINE</h3><p class="small">チリ産</p><p>エラスリス<br>ソーヴィニヨン・ブラン</p></div>
+        <div class="drink-group"><h3>RED WINE</h3><p class="small">オーストラリア産</p><p>ピーターレーマン<br>カベルネ・ソーヴィニヨン</p></div>
+        <div class="ornament"></div>
+        <div class="drink-group"><h3>BEER</h3><p>ビール<br>ノンアルコールビール</p></div>
+        <div class="drink-group"><h3>WHISKY</h3><p>デュワーズ ホワイト・ラベル</p></div>
+        <div class="drink-group"><h3>SHOCHU</h3><p>麦：壱乃國<br>芋：浅黄うさぎ</p></div>
+        <div class="drink-group"><h3>SAKE</h3><p>嘉泉 純米吟醸</p></div>
+        <div class="drink-group"><h3>SOUR</h3><p>ボタニカルレモンサワー</p></div>
+        <div class="drink-group"><h3>LIQUEUR</h3><p>プレミアムカシス</p></div>
+        <div class="drink-group"><h3>COCKTAIL</h3><p>季節のカクテル 2種</p></div>
+        <div class="ornament"></div>
+        <div class="drink-group"><h3>SOFT DRINK</h3><p>オレンジジュース　烏龍茶<br>コーラ　ジンジャーエール</p></div>
+        <div class="drink-group"><h3>SPARKLING WATER</h3><p>ペリエ</p></div>
+        <div class="drink-group"><h3>HERB CORDIAL</h3><p>エルダーフラワーソーダ</p></div>
+        <div class="drink-group"><h3>MOCKTAIL</h3><p>ストロベリースプモーニ<br>オーザフトショーレ</p></div>
+      </section>
+      <div class="venue">ホテル椿山荘東京</div>
+    </section>
+  </main>
+  <script>
+    const tabs = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(button => {
+          const selected = button === tab;
+          button.classList.toggle('active', selected);
+          button.setAttribute('aria-selected', selected ? 'true' : 'false');
+        });
+        panels.forEach(panel => panel.classList.toggle('active', panel.id === tab.dataset.tab));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
