@@ -123,6 +123,133 @@ img,svg{max-width:100%}
   }
 }
 
+
+/* --- Mobile-safe layout override --- */
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+body{
+  overflow-x:hidden;
+}
+.wrap,
+.card,
+.people,
+.person,
+.about,
+.about-grid,
+.story,
+.qa,
+.qa-list,
+.question,
+.answers,
+.answer{
+  box-sizing:border-box;
+  min-width:0;
+}
+.about,
+.about-grid,
+.qa,
+.qa-list,
+.people{
+  width:100%;
+  max-width:760px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.story,
+.question,
+.person{
+  width:100%;
+  max-width:100%;
+}
+.story p{
+  width:100%;
+  max-width:none;
+  margin:0;
+  text-align:center;
+  white-space:normal;
+  word-break:normal;
+  overflow-wrap:normal;
+}
+.text-line{
+  display:block;
+}
+
+@media (max-width:600px){
+  .wrap{
+    width:100%;
+    max-width:100%;
+    padding:10px 8px 24px;
+  }
+  .card{
+    width:100%;
+    max-width:100%;
+    padding:24px 14px 26px;
+    border-radius:18px;
+    overflow:hidden;
+  }
+  .people{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .person,
+  .story,
+  .question{
+    border-radius:18px;
+  }
+  .about{
+    margin-top:32px;
+    padding-top:30px;
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .story{
+    min-height:0;
+    padding:22px 14px;
+  }
+  .story .story-label{
+    margin-bottom:14px;
+    font-size:11px;
+  }
+  .story p{
+    font-size:14px;
+    line-height:1.95;
+    letter-spacing:0;
+  }
+  .text-line{
+    display:block;
+    max-width:100%;
+  }
+  .qa{
+    margin-top:32px;
+    padding-top:30px;
+  }
+  .qa-list{
+    gap:14px;
+  }
+  .question{
+    padding:20px 14px 18px;
+  }
+  .answers{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .answer p{
+    width:100%;
+    max-width:100%;
+    margin:0 auto;
+    font-size:13px;
+    line-height:1.9;
+    white-space:normal;
+    word-break:normal;
+    overflow-wrap:anywhere;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -250,15 +377,27 @@ img,svg{max-width:100%}
     <div class="about-grid">
       <div class="story">
         <span class="story-label">ふたりの趣味</span>
-        <p>カメラ好きのふたり。散歩しながら、季節の景色を写真に残しています。</p>
+        <p>
+          <span class="text-line">カメラ好きのふたり。</span>
+          <span class="text-line">散歩しながら、季節の景色を</span>
+          <span class="text-line">写真に残しています。</span>
+        </p>
       </div>
       <div class="story">
         <span class="story-label">出会い</span>
-        <p>前職の同期として出会いました。</p>
+        <p>
+          <span class="text-line">前職の同期として</span>
+          <span class="text-line">出会いました。</span>
+        </p>
       </div>
       <div class="story">
         <span class="story-label">ゲストへのメッセージ</span>
-        <p>本日はお越しいただきありがとうございます。皆さまと一緒に過ごせることを楽しみにしています。</p>
+        <p>
+          <span class="text-line">本日はお越しいただき</span>
+          <span class="text-line">ありがとうございます。</span>
+          <span class="text-line">皆さまと一緒に過ごせることを</span>
+          <span class="text-line">楽しみにしています。</span>
+        </p>
       </div>
     </div>
   </section>
