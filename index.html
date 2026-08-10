@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Menu</title>
+  <style>
+    :root{
+      --bg:#f7f5f1;
+      --paper:#fffdf9;
+      --text:#2f2f2f;
+      --muted:#77736d;
+      --line:#d9d3ca;
+      --accent:#7c8571;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:
+        "Hiragino Mincho ProN","Yu Mincho","YuMincho",
+        "Noto Serif JP",serif;
+      line-height:1.9;
+      -webkit-font-smoothing:antialiased;
+    }
+    .wrap{
+      max-width:720px;
+      margin:0 auto;
+      padding:28px 18px 48px;
+    }
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:38px 22px 34px;
+      box-shadow:0 10px 30px rgba(0,0,0,.04);
+    }
+    .eyebrow{
+      text-align:center;
+      letter-spacing:.22em;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+    h1{
+      text-align:center;
+      font-size:28px;
+      font-weight:500;
+      letter-spacing:.08em;
+      margin:0 0 8px;
+    }
+    .date{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.08em;
+      margin-bottom:34px;
+    }
+    .divider{
+      width:42px;
+      height:1px;
+      background:var(--accent);
+      margin:0 auto 34px;
+      opacity:.7;
+    }
+    .course{
+      text-align:center;
+      padding:0 4px;
+    }
+    .item{
+      margin:0 0 27px;
+    }
+    .item p{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.02em;
+    }
+    .item .small{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .ornament{
+      margin:24px auto 26px;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--accent);
+      opacity:.55;
+    }
+    .note{
+      margin-top:32px;
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .venue{
+      margin-top:34px;
+      text-align:center;
+      font-size:14px;
+      letter-spacing:.05em;
+    }
+
+    .motif{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+    .leaf{
+      position:absolute;
+      width:180px;
+      height:180px;
+      opacity:.08;
+      transform:rotate(-18deg);
+    }
+    .leaf::before,
+    .leaf::after{
+      content:"";
+      position:absolute;
+      border:1px solid var(--accent);
+      border-radius:100% 0 100% 0;
+      width:72px;
+      height:118px;
+    }
+    .leaf::before{
+      left:38px;
+      top:16px;
+      transform:rotate(18deg);
+    }
+    .leaf::after{
+      left:82px;
+      top:48px;
+      transform:rotate(48deg);
+    }
+    .leaf.tl{top:-30px;left:-38px}
+    .leaf.br{right:-44px;bottom:-36px;transform:rotate(162deg)}
+    .stem{
+      position:absolute;
+      width:1px;
+      height:150px;
+      background:var(--accent);
+      left:88px;
+      top:25px;
+      transform:rotate(28deg);
+      transform-origin:top;
+    }
+    .wrap{position:relative;z-index:1}
+
+    @media (max-width:480px){
+      .wrap{padding:16px 10px 28px}
+      .card{padding:30px 16px 28px;border-radius:18px}
+      h1{font-size:24px}
+      .item p{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <div class="motif" aria-hidden="true">
+    <div class="leaf tl"><div class="stem"></div></div>
+    <div class="leaf br"><div class="stem"></div></div>
+  </div>
+  <main class="wrap">
+    <section class="card">
+      <div class="eyebrow">Wedding Reception</div>
+      <h1>MENU</h1>
+      <div class="date">2026.09.27</div>
+      <div class="divider"></div>
+
+      <div class="course">
+        <div class="item">
+          <p>旬を迎えた茸のマリアージュ</p>
+          <p class="small">〜 甘えび・鴨・柿 〜</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>海老のカダイフ巻き　モルタデラのアンクルート</p>
+          <p>本鮪の黒米握り　オレンジのムース</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>米茄子の鴫炊き</p>
+          <p>合鴨ロースの醤油煮　葱の香り</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>カナダ産オマール海老の西京味噌焼き</p>
+          <p class="small">ミックスリーフ添え</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>国産牛サーロインステーキ</p>
+          <p>大徳寺納豆を使った自家製豆豉　山葵</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>焼き蟹味噌ご飯のお茶漬け</p>
+        </div>
+
+        <div class="ornament"></div>
+
+        <div class="item">
+          <p>抹茶と栗のモンブラン仕立て</p>
+          <p>温州みかんのソルベと</p>
+          <p>エルダーフラワーとシトラスジュレ</p>
+        </div>
+      </div>
+
+      <div class="note">＊米は国内産です</div>
+      <div class="venue">ホテル椿山荘東京</div>
+    </section>
+  </main>
+</body>
+</html>
