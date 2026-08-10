@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Profile</title>
+<style>
+:root{
+  --bg:#f7f5f1;
+  --paper:#fffdf9;
+  --text:#2f2f2f;
+  --muted:#77736d;
+  --line:#e0d9cf;
+  --accent:#8d7a49;
+  --leaf:#6f8160;
+  --camellia:#cf5c63;
+  --camellia-deep:#b5454f;
+  --camellia-light:#f5efe7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:24px 14px 42px;position:relative;z-index:1}
+.card{background:rgba(255,253,249,.97);border:1px solid var(--line);border-radius:22px;padding:34px 22px 36px;box-shadow:0 10px 30px rgba(0,0,0,.04);position:relative;overflow:hidden}
+.eyebrow{text-align:center;letter-spacing:.22em;font-size:12px;color:var(--muted);text-transform:uppercase}
+h1{text-align:center;font-size:30px;font-weight:500;letter-spacing:.08em;margin:4px 0 0;color:var(--accent)}
+.date{text-align:center;color:var(--muted);font-size:13px;letter-spacing:.08em;margin:8px 0 24px}
+.hero{width:100%;max-width:470px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.hero img{display:block;width:100%;height:auto}
+.names{text-align:center;margin:24px 0 22px;font-family:Georgia,"Times New Roman",serif;font-size:18px;letter-spacing:.13em;color:var(--accent)}
+.divider{width:56px;height:1px;background:var(--accent);margin:0 auto 32px;opacity:.7}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;margin:0 auto}
+.person{text-align:center;background:rgba(255,255,255,.45);border:1px solid rgba(224,217,207,.8);border-radius:22px;padding:22px 18px;min-height:100%}
+.person .role{font-family:Georgia,"Times New Roman",serif;font-size:10px;letter-spacing:.18em;color:var(--muted)}
+.person h2{font-family:Georgia,"Times New Roman",serif;font-size:21px;font-weight:400;letter-spacing:.12em;margin:4px 0 16px;color:#695933}
+.profile-row{margin:0 0 12px}
+.label{display:block;font-size:10px;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.value{display:block;font-size:14px;margin-top:2px}
+.about{max-width:760px;margin:38px auto 0;padding-top:34px;border-top:1px solid var(--line)}
+.section-title{text-align:center;font-family:Georgia,"Times New Roman",serif;font-size:13px;letter-spacing:.18em;color:var(--accent);margin-bottom:28px}
+.about-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:760px;margin:0 auto;justify-items:stretch}
+.story{text-align:center;background:rgba(255,255,255,.42);border:1px solid rgba(224,217,207,.75);border-radius:22px;padding:28px 34px;min-height:184px;width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.story .story-label{display:block;font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:18px;text-align:center}
+.story p{font-size:15px;margin:0;line-height:2.15;max-width:22em;margin-inline:auto;word-break:keep-all}
+.qa{max-width:760px;margin:38px auto 0;padding-top:34px;border-top:1px solid var(--line)}
+.qa-list{display:grid;gap:20px;max-width:760px;margin:0 auto}
+.question{background:rgba(255,255,255,.5);border:1px solid rgba(224,217,207,.8);border-radius:22px;padding:24px 24px 22px;width:100%}
+.qnum{text-align:center;font-family:Georgia,"Times New Roman",serif;font-size:12px;letter-spacing:.16em;color:var(--accent)}
+.question h3{text-align:center;font-size:16px;font-weight:500;letter-spacing:.04em;margin:4px 0 18px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.answer{text-align:center;padding:2px 8px 0}
+.answer-name{font-family:Georgia,"Times New Roman",serif;font-size:10px;letter-spacing:.15em;color:var(--muted);margin-bottom:8px}
+.answer p{font-size:13px;line-height:1.9;margin:0 auto;max-width:210px;text-wrap:balance}
+.answer.pending p{color:#aaa59d}
+.venue{text-align:center;margin-top:34px;font-size:14px;letter-spacing:.06em}
+.motif{display:none}
+.camellia{position:absolute;width:240px;height:320px;opacity:.88}
+.top-left{top:-8px;left:-26px}
+.top-right{top:-8px;right:-24px;transform:scaleX(-1)}
+.bottom-left{bottom:-22px;left:-28px;transform:rotate(6deg)}
+.bottom-right{bottom:-22px;right:-26px;transform:scaleX(-1) rotate(6deg)}
+.camellia svg{width:100%;height:100%}
+.branch{fill:none;stroke:#8b8b70;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.leaf-fill{fill:#7a8d69;opacity:.9}
+.leaf-line{fill:none;stroke:#6f8160;stroke-width:.8}
+.petal-red{fill:var(--camellia)}
+.petal-red-deep{fill:var(--camellia-deep)}
+.petal-white{fill:#faf8f2}
+.petal-cream{fill:#f2ebde}
+.center-fill{fill:#e3b84a}
+.stamen{stroke:#d7a933;stroke-width:.8;stroke-linecap:round}
+@media(max-width:480px){
+  .wrap{padding:14px 9px 28px}
+  .card{padding:28px 14px 28px;border-radius:18px}
+  h1{font-size:25px}
+  .hero{max-width:100%;border-radius:14px}
+  .people{grid-template-columns:1fr;gap:14px}
+  .person h2{font-size:18px}
+  .value,.answer p{font-size:13px}
+  .story{padding:22px 18px;border-radius:18px;min-height:auto;width:100%}
+  .story .story-label{margin-bottom:14px}
+  .story p{font-size:14px;max-width:18em;line-height:2.0}
+  .answers{grid-template-columns:1fr}
+  .camellia{width:150px;height:205px;opacity:.82}
+  .top-left{top:-10px;left:-40px}
+  .top-right{top:-10px;right:-40px}
+  .bottom-left{bottom:-24px;left:-50px}
+  .bottom-right{bottom:-24px;right:-50px}
+}
+</style>
+</head>
+<body>
+<div class="motif" aria-hidden="true">
+  <div class="camellia top-left">
+    <svg viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="branch" d="M10 336 C46 285,72 228,98 172 C120 128,145 79,193 22"/>
+      <ellipse class="leaf-fill" cx="74" cy="238" rx="18" ry="33" transform="rotate(-40 74 238)"/>
+      <path class="leaf-line" d="M62 257 C71 244,79 227,86 211"/>
+      <ellipse class="leaf-fill" cx="129" cy="145" rx="17" ry="30" transform="rotate(28 129 145)"/>
+      <path class="leaf-line" d="M118 121 C126 133,134 145,140 169"/>
+      <ellipse class="leaf-fill" cx="190" cy="71" rx="15" ry="28" transform="rotate(18 190 71)"/>
+      <path class="leaf-line" d="M178 48 C184 60,189 73,196 96"/>
+      <g transform="translate(78 126)">
+        <path class="petal-red" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-red-deep" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-red" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-red-deep" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-red" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="11"/>
+        <g class="stamen">
+          <line x1="38" y1="49" x2="29" y2="40"/><line x1="38" y1="49" x2="41" y2="35"/><line x1="38" y1="49" x2="50" y2="39"/>
+          <line x1="38" y1="49" x2="54" y2="49"/><line x1="38" y1="49" x2="24" y2="54"/><line x1="38" y1="49" x2="48" y2="61"/>
+        </g>
+      </g>
+      <g transform="translate(18 228) scale(.9)">
+        <path class="petal-white" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-cream" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-white" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-cream" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-white" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="10"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="camellia top-right">
+    <svg viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="branch" d="M10 336 C46 285,72 228,98 172 C120 128,145 79,193 22"/>
+      <ellipse class="leaf-fill" cx="74" cy="238" rx="18" ry="33" transform="rotate(-40 74 238)"/>
+      <ellipse class="leaf-fill" cx="129" cy="145" rx="17" ry="30" transform="rotate(28 129 145)"/>
+      <g transform="translate(86 118)">
+        <path class="petal-red" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-red-deep" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-red" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-red-deep" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-red" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="11"/>
+      </g>
+      </svg>
+  </div>
+
+  <div class="camellia bottom-left">
+    <svg viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="branch" d="M12 320 C60 286,93 232,112 180 C129 130,142 82,152 16"/>
+      <ellipse class="leaf-fill" cx="72" cy="214" rx="17" ry="31" transform="rotate(-26 72 214)"/>
+      <ellipse class="leaf-fill" cx="116" cy="146" rx="15" ry="29" transform="rotate(38 116 146)"/>
+      <g transform="translate(22 206)">
+        <path class="petal-red" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-red-deep" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-red" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-red-deep" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-red" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="11"/>
+      </g>
+      <g transform="translate(114 262) scale(.88)">
+        <path class="petal-white" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-cream" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-white" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-cream" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-white" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="10"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="camellia bottom-right">
+    <svg viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+      <path class="branch" d="M12 320 C60 286,93 232,112 180 C129 130,142 82,152 16"/>
+      <ellipse class="leaf-fill" cx="72" cy="214" rx="17" ry="31" transform="rotate(-26 72 214)"/>
+      <ellipse class="leaf-fill" cx="116" cy="146" rx="15" ry="29" transform="rotate(38 116 146)"/>
+      <g transform="translate(112 224)">
+        <path class="petal-white" d="M0 30 C6 4,30 -8,48 10 C43 30,24 42,0 30Z"/>
+        <path class="petal-cream" d="M24 0 C48 -2,62 14,58 34 C36 40,20 28,24 0Z"/>
+        <path class="petal-white" d="M53 16 C77 13,91 31,83 54 C61 57,45 43,53 16Z"/>
+        <path class="petal-cream" d="M60 51 C79 66,77 88,58 97 C38 86,40 61,60 51Z"/>
+        <path class="petal-white" d="M28 67 C34 89,18 106,-5 100 C-14 79,-1 61,28 67Z"/>
+        <circle class="center-fill" cx="38" cy="49" r="10"/>
+      </g>
+      </svg>
+  </div>
+</div>
+
+<main class="wrap">
+<section class="card">
+  <div class="eyebrow">Wedding Day</div>
+  <h1>OUR PROFILE</h1>
+  <div class="date">2026.09.27</div>
+
+  <div class="hero"><img src="profile.jpg" alt="Haruki and Manami"></div>
+  <div class="names">HARUKI &amp; MANAMI</div>
+  <div class="divider"></div>
+
+  <div class="people">
+    <section class="person">
+      <div class="role">GROOM</div>
+      <h2>HARUKI</h2>
+      <div class="profile-row"><span class="label">Birthday</span><span class="value">1993.04.09</span></div>
+      <div class="profile-row"><span class="label">From</span><span class="value">埼玉県</span></div>
+      <div class="profile-row"><span class="label">Hobby</span><span class="value">フットサル<br>料理</span></div>
+      <div class="profile-row"><span class="label">Comment</span><span class="value">―</span></div>
+    </section>
+    <section class="person">
+      <div class="role">BRIDE</div>
+      <h2>MANAMI</h2>
+      <div class="profile-row"><span class="label">Birthday</span><span class="value">1994.09.04</span></div>
+      <div class="profile-row"><span class="label">From</span><span class="value">兵庫県</span></div>
+      <div class="profile-row"><span class="label">Hobby</span><span class="value">書道<br>バイオリン</span></div>
+      <div class="profile-row"><span class="label">Comment</span><span class="value">―</span></div>
+    </section>
+  </div>
+
+  <section class="about">
+    <div class="section-title">ABOUT US</div>
+    <div class="about-grid">
+      <div class="story">
+        <span class="story-label">ふたりの趣味</span>
+        <p>カメラ好きのふたり。散歩しながら、季節の景色を写真に残しています。</p>
+      </div>
+      <div class="story">
+        <span class="story-label">出会い</span>
+        <p>前職の同期として出会いました。</p>
+      </div>
+      <div class="story">
+        <span class="story-label">ゲストへのメッセージ</span>
+        <p>本日はお越しいただきありがとうございます。皆さまと一緒に過ごせることを楽しみにしています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="qa">
+    <div class="section-title">Q &amp; A</div>
+    <div class="qa-list">
+      <div class="question">
+        <div class="qnum">01</div>
+        <h3>お互いの第一印象は？</h3>
+        <div class="answers">
+          <div class="answer">
+            <div class="answer-name">HARUKI</div>
+            <p>髪が長い</p>
+          </div>
+          <div class="answer">
+            <div class="answer-name">MANAMI</div>
+            <p>仕事に厳しそうで<br>ちょっと怖かった</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="qnum">02</div>
+        <h3>相手の好きなところは？</h3>
+        <div class="answers">
+          <div class="answer">
+            <div class="answer-name">HARUKI</div>
+            <p>コツコツと<br>習字やバイオリンの趣味を<br>続けられること。<br><br>好きなものや<br>心地よいと感じる感覚が<br>似ているところ。</p>
+          </div>
+          <div class="answer">
+            <div class="answer-name">MANAMI</div>
+            <p>おおらかで、やさしいところ。<br><br>やらないといけないことの<br>段取りを上手にできること。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="qnum">03</div>
+        <h3>これからふたりでやってみたいことは？</h3>
+        <div class="answers">
+          <div class="answer">
+            <div class="answer-name">HARUKI</div>
+            <p>ランニング<br>BBQ</p>
+          </div>
+          <div class="answer pending">
+            <div class="answer-name">MANAMI</div>
+            <p>Coming soon...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="venue">ホテル椿山荘東京</div>
+</section>
+</main>
+</body>
+</html>
