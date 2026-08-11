@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f3eb">
+  <meta name="format-detection" content="telephone=no">
+  <title>Thank you | 2026.09.27</title>
+
+  <style>
+    :root{
+      --bg:#f4efe6;
+      --ink:#2c2925;
+      --muted:#8a8177;
+      --line:#d8c1a3;
+      --paper:#fffdf8;
+      --shadow:0 18px 60px rgba(66,54,39,.12);
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "YuMincho",
+        "Noto Serif JP",
+        serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      min-height:100svh;
+      overflow-x:hidden;
+    }
+
+    .page{
+      width:min(100%, 680px);
+      margin:0 auto;
+      padding:
+        calc(28px + env(safe-area-inset-top))
+        18px
+        calc(42px + env(safe-area-inset-bottom));
+    }
+
+    .intro{
+      text-align:center;
+      padding:14px 8px 26px;
+    }
+
+    .eyebrow{
+      margin:0 0 10px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(34px, 10vw, 52px);
+      font-weight:400;
+      letter-spacing:.035em;
+      line-height:1.05;
+    }
+
+    .date{
+      margin:13px 0 0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:13px;
+      letter-spacing:.18em;
+      color:var(--muted);
+    }
+
+    .rule{
+      width:38px;
+      height:1px;
+      margin:22px auto 0;
+      background:var(--line);
+      opacity:.8;
+    }
+
+    .message{
+      margin:0 auto 28px;
+      max-width:30em;
+      text-align:center;
+      font-size:14px;
+      line-height:2;
+      letter-spacing:.04em;
+    }
+
+    .letter-wrap{
+      width:100%;
+      overflow:hidden;
+      background:var(--paper);
+      box-shadow:var(--shadow);
+    }
+
+    .letter-wrap img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .hint{
+      margin:13px 0 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:.05em;
+    }
+
+    footer{
+      padding:34px 0 2px;
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:.14em;
+      line-height:1.9;
+    }
+
+    @media (min-width:700px){
+      .page{
+        padding-left:28px;
+        padding-right:28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="intro">
+      <p class="eyebrow">With our gratitude</p>
+      <h1>Thank you</h1>
+      <p class="date">2026.09.27</p>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+
+    <p class="message">
+      私たちの結婚式にお越しいただき、<br>
+      本当にありがとうございました。<br>
+      感謝の気持ちを込めて。
+    </p>
+
+    <section aria-label="お礼のお手紙">
+      <div class="letter-wrap">
+        <img
+          src="assets/letter.png"
+          alt="結婚式にご出席くださった皆さまへのお礼のお手紙">
+      </div>
+      <p class="hint">お手紙をご覧ください</p>
+    </section>
+
+    <footer>
+      HARUKI &amp; MANAMI<br>
+      2026.09.27
+    </footer>
+  </main>
+</body>
+</html>
