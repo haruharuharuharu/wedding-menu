@@ -164,3 +164,993 @@
   </main>
 </body>
 </html>
+
+
+
+画像の「Music List」と、貼っていただいた結婚式後のお礼ページHTML、確認できました。
+
+この2つを組み合わせるなら、たとえば お礼状の下に「披露宴で使用した曲」のセクションを追加して、画像と同じような上品な2カラムのMusic ListをHTML化する ことができます。スマホでは1カラムに切り替わる形にもできます。
+
+やりたい方向を教えてください。たとえば、
+
+今のHTMLに、画像のMusic Listを追加したい
+Music Listだけ別ページとしてHTML化したい
+画像のデザインに合わせて、お礼ページ全体も作り直したい
+画像内の曲名を文字起こしして、HTMLコードまで完成させたい
+
+のどれでも対応できます。
+
+個人的には、「Thank you → お礼状 → Wedding Music → HARUKI & MANAMI」 の順で1ページにまとめると、式後にLINEから見てもかなりきれいにまとまると思います。
+
+Thank you → お礼状 → Wedding Music → HARUKI & MANAMI  
+
+でまとめて
+
+いいですね。今のお礼ページの雰囲気を残しつつ、
+
+Thank you → お礼状 → Wedding Music → HARUKI & MANAMI
+
+の順で、1ページを縦にスクロールして見られる構成にするとかなり自然です。
+
+Music Listは、いただいた画像をベースに、PCでは2列・スマホでは1列にしてあります。お礼状からMusic Listへの切り替わりも、余白をしっかり取って「別コンテンツ感」は出しつつ、ページ全体としては統一しています。
+
+以下のHTMLに丸ごと差し替えれば使えます。
+
+仕上がりのイメージ
+
+今回は、Music Listの画像をそのまま貼るのではなく、全部HTMLテキスト化しています。なのでスマホでも文字が小さくならず、かなり見やすいです。
+
+特にページ全体を、
+
+Thank you
+↓
+感謝メッセージ
+↓
+手書きのお礼状
+↓
+大きめの余白
+↓
+Wedding Music
+↓
+披露宴BGM一覧
+↓
+HARUKI & MANAMI / 2026.09.27
+
+という流れにしました。
+
+今のお礼ページの「紙・万年筆・少しクラシカル」という雰囲気には、画像にあった筆記体の Music List をそのまま再現するより、Wedding MusicをGeorgiaで少し静かに置くくらいの方が全体の統一感は出ると思います。
+
+また、スマホではMusic Listが
+
+新郎新婦入場 → 乾杯 → … → 退場 → ゲスト入場 → 歓談…
+
+の順になります。ここだけ、披露宴の時系列順になるようにスマホ表示時だけ並び順を組み替えることもできます。個人的にはそこまでやるとさらに見やすいです。
+
+見やすくして
+
+特にLINEからスマホで見ることを考えると、Music Listの2カラムはやめて、場面ごとに1列で並べるのが一番見やすいです。
+
+また、曲名 / アーティスト を1行に詰めず、
+
+晴る
+ヨルシカ
+
+のように分けます。複数曲ある場面も区切りが分かるようにしました。ページ全体も「お礼状」と「音楽リスト」の境目をはっきりさせています。
+
+こちらに差し替えるのがおすすめです。
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4efe6">
+  <meta name="format-detection" content="telephone=no">
+
+  <title>Thank you | 2026.09.27</title>
+
+  <style>
+    :root{
+      --bg:#f4efe6;
+      --paper:#fffdf8;
+      --ink:#2c2925;
+      --muted:#8a8177;
+      --line:#ddd2c2;
+      --accent:#c8ab87;
+      --shadow:0 14px 45px rgba(66,54,39,.10);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    html,
+    body{
+      margin:0;
+      min-height:100%;
+    }
+
+    body{
+      min-height:100svh;
+      overflow-x:hidden;
+
+      background:var(--bg);
+      color:var(--ink);
+
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "YuMincho",
+        "Noto Serif JP",
+        serif;
+
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .page{
+      width:min(100%, 680px);
+      margin:0 auto;
+
+      padding:
+        calc(30px + env(safe-area-inset-top))
+        18px
+        calc(50px + env(safe-area-inset-bottom));
+    }
+
+
+    /* ==========================
+       THANK YOU
+    ========================== */
+
+    .intro{
+      text-align:center;
+      padding:12px 8px 28px;
+    }
+
+    .eyebrow{
+      margin:0 0 10px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:11px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+
+      color:var(--muted);
+    }
+
+    h1{
+      margin:0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:clamp(38px, 11vw, 54px);
+      font-weight:400;
+      line-height:1.1;
+      letter-spacing:.03em;
+    }
+
+    .date{
+      margin:14px 0 0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:12px;
+      letter-spacing:.2em;
+
+      color:var(--muted);
+    }
+
+    .short-line{
+      width:36px;
+      height:1px;
+
+      margin:22px auto 0;
+
+      background:var(--accent);
+    }
+
+
+    /* ==========================
+       MESSAGE
+    ========================== */
+
+    .message{
+      margin:0 auto 30px;
+
+      max-width:32em;
+
+      text-align:center;
+
+      font-size:14px;
+      line-height:2.1;
+      letter-spacing:.035em;
+    }
+
+
+    /* ==========================
+       LETTER
+    ========================== */
+
+    .letter-wrap{
+      width:100%;
+      overflow:hidden;
+
+      background:var(--paper);
+      box-shadow:var(--shadow);
+    }
+
+    .letter-wrap img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+
+    /* ==========================
+       SEPARATOR
+    ========================== */
+
+    .section-separator{
+      display:flex;
+      align-items:center;
+      gap:16px;
+
+      margin:76px 0 54px;
+    }
+
+    .section-separator::before,
+    .section-separator::after{
+      content:"";
+
+      height:1px;
+      flex:1;
+
+      background:var(--line);
+    }
+
+    .section-separator span{
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:12px;
+      letter-spacing:.15em;
+
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+
+    /* ==========================
+       MUSIC HEADER
+    ========================== */
+
+    .music-header{
+      text-align:center;
+      margin-bottom:38px;
+    }
+
+    .music-eyebrow{
+      margin:0 0 9px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+
+      color:var(--muted);
+    }
+
+    .music-title{
+      margin:0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:clamp(32px, 9vw, 46px);
+      line-height:1.15;
+      font-weight:400;
+    }
+
+    .music-description{
+      margin:14px 0 0;
+
+      font-size:12px;
+      line-height:1.8;
+      letter-spacing:.08em;
+
+      color:var(--muted);
+    }
+
+
+    /* ==========================
+       MUSIC LIST
+    ========================== */
+
+    .music-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .music-card{
+      padding:23px 22px 20px;
+
+      background:rgba(255,253,248,.72);
+      border:1px solid rgba(216,193,163,.45);
+    }
+
+    .scene{
+      margin:0 0 17px;
+
+      font-size:16px;
+      font-weight:600;
+      letter-spacing:.08em;
+      line-height:1.5;
+    }
+
+    .tracks{
+      display:flex;
+      flex-direction:column;
+      gap:13px;
+    }
+
+    .track + .track{
+      padding-top:13px;
+      border-top:1px solid rgba(138,129,119,.16);
+    }
+
+    .song{
+      margin:0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        serif;
+
+      font-size:15px;
+      line-height:1.6;
+      letter-spacing:.035em;
+    }
+
+    .artist{
+      margin:3px 0 0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        serif;
+
+      font-size:11px;
+      line-height:1.6;
+      letter-spacing:.09em;
+
+      color:var(--muted);
+    }
+
+
+    /* ==========================
+       FOOTER
+    ========================== */
+
+    footer{
+      margin-top:76px;
+      padding:32px 0 8px;
+
+      text-align:center;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      color:var(--muted);
+    }
+
+    .footer-line{
+      width:36px;
+      height:1px;
+
+      margin:0 auto 25px;
+
+      background:var(--accent);
+    }
+
+    .names{
+      margin:0;
+
+      font-size:12px;
+      letter-spacing:.18em;
+      line-height:2;
+    }
+
+    .footer-date{
+      margin:4px 0 0;
+
+      font-size:10px;
+      letter-spacing:.2em;
+    }
+
+
+    /* ==========================
+       DESKTOP
+    ========================== */
+
+    @media (min-width:700px){
+
+      .page{
+        padding-left:28px;
+        padding-right:28px;
+      }
+
+      .music-card{
+        display:grid;
+        grid-template-columns:150px 1fr;
+        gap:26px;
+
+        padding:25px 28px;
+      }
+
+      .scene{
+        margin:1px 0 0;
+        font-size:15px;
+      }
+
+    }
+
+
+    /* ==========================
+       SMALL MOBILE
+    ========================== */
+
+    @media (max-width:420px){
+
+      .page{
+        padding-left:15px;
+        padding-right:15px;
+      }
+
+      .message{
+        font-size:13px;
+      }
+
+      .section-separator{
+        margin-top:62px;
+        margin-bottom:45px;
+      }
+
+      .music-card{
+        padding:20px 18px 18px;
+      }
+
+      .scene{
+        font-size:15px;
+      }
+
+      .song{
+        font-size:14px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="page">
+
+
+    <!-- THANK YOU -->
+
+    <header class="intro">
+
+      <p class="eyebrow">
+        With our gratitude
+      </p>
+
+      <h1>
+        Thank you
+      </h1>
+
+      <p class="date">
+        2026.09.27
+      </p>
+
+      <div class="short-line"></div>
+
+    </header>
+
+
+    <p class="message">
+      私たちの結婚式にお越しいただき、<br>
+      本当にありがとうございました。<br>
+      感謝の気持ちを込めて。
+    </p>
+
+
+    <!-- LETTER -->
+
+    <section aria-label="お礼のお手紙">
+
+      <div class="letter-wrap">
+
+        <img
+          src="assets/letter.png"
+          alt="結婚式にご出席くださった皆さまへのお礼のお手紙">
+
+      </div>
+
+    </section>
+
+
+
+    <!-- SEPARATOR -->
+
+    <div class="section-separator">
+      <span>OUR WEDDING</span>
+    </div>
+
+
+
+    <!-- WEDDING MUSIC -->
+
+    <section aria-labelledby="music-title">
+
+      <header class="music-header">
+
+        <p class="music-eyebrow">
+          Soundtrack of our day
+        </p>
+
+        <h2
+          id="music-title"
+          class="music-title">
+          Wedding Music
+        </h2>
+
+        <p class="music-description">
+          披露宴を彩ってくれた音楽
+        </p>
+
+      </header>
+
+
+      <div class="music-list">
+
+
+        <!-- ゲスト入場 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            ゲスト入場
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">車窓</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">森の教会</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">創作</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">飛行</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">Cradle</p>
+              <p class="artist">bohemian voodoo</p>
+            </div>
+
+            <div class="track">
+              <p class="song">Lapis lazuli</p>
+              <p class="artist">bohemian voodoo</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 新郎新婦入場 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            新郎新婦入場
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">晴る</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 乾杯 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            乾杯
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">Lovers</p>
+              <p class="artist">sumika</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 鏡開き -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            鏡開き
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">NIPPON</p>
+              <p class="artist">椎名林檎</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 歓談 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            歓談
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">POP MEETS CLASSICAL</p>
+              <p class="artist">The Piano Guys</p>
+            </div>
+
+            <div class="track">
+              <p class="song">A Sky Full Of Stars</p>
+              <p class="artist">The Piano Guys</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 新婦中座 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            新婦中座
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">WINDING ROAD</p>
+              <p class="artist">絢香 × コブクロ</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 新郎中座 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            新郎中座
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">運命</p>
+              <p class="artist">sumika</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- お色直し入場 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            お色直し入場
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">千鳥</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- テーブルラウンド -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            テーブルラウンド
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">群青</p>
+              <p class="artist">YOASOBI</p>
+            </div>
+
+            <div class="track">
+              <p class="song">ただ君に晴れ</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">アカシア</p>
+              <p class="artist">BUMP OF CHICKEN</p>
+            </div>
+
+            <div class="track">
+              <p class="song">火星人</p>
+              <p class="artist">ヨルシカ</p>
+            </div>
+
+            <div class="track">
+              <p class="song">炎と森のカーニバル</p>
+              <p class="artist">SEKAI NO OWARI</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- ラッキードラジェ -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            ラッキードラジェ
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">
+                シュガーソングとビターステップ
+              </p>
+
+              <p class="artist">
+                UNISON SQUARE GARDEN
+              </p>
+            </div>
+
+            <div class="track">
+              <p class="song">It's My Life</p>
+              <p class="artist">YUI</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- お手紙 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            お手紙
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">CURTAIN CALL</p>
+
+              <p class="artist">
+                haruka nakamura PIANO ENSEMBLE
+              </p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 記念品贈呈 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            記念品贈呈
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">Family Song</p>
+              <p class="artist">星野源</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 退場 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            退場
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">蝶々結び</p>
+              <p class="artist">Aimer</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- エンディングムービー -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            エンディングムービー
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">Ordinary days</p>
+              <p class="artist">milet</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- 送賓 -->
+
+        <article class="music-card">
+
+          <h3 class="scene">
+            送賓
+          </h3>
+
+          <div class="tracks">
+
+            <div class="track">
+              <p class="song">光るとき</p>
+              <p class="artist">羊文学</p>
+            </div>
+
+            <div class="track">
+              <p class="song">ONE</p>
+              <p class="artist">Aimer</p>
+            </div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      <div class="footer-line"></div>
+
+      <p class="names">
+        HARUKI &amp; MANAMI
+      </p>
+
+      <p class="footer-date">
+        2026.09.27
+      </p>
+
+    </footer>
+
+
+  </main>
+
+</body>
+</html>
